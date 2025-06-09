@@ -45,19 +45,21 @@ class DB
        /**
 	*	This method makes connection to the database.
 	*	
-	*	1. Reads the database settings from a ini file. 
-	*	2. Puts  the ini content into the settings array.
-	*	3. Tries to connect to the database.
-	*	4. If connection failed, exception is displayed and a log file gets created.
+	*	1. Reads the database settings from environment variables. 
+	*	2. Tries to connect to the database.
+	*	3. If connection failed, exception is displayed and a log file gets created.
 	*/
 		private function Connect()
 		{
-			$this->settings = parse_ini_file("settings.ini.php");
-			$dsn = 'mysql:dbname='.$this->settings["dbname"].';host='.$this->settings["host"].'';
+                        $host = getenv("DB_HOST");
+                        $user = getenv("DB_USER");
+                        $password = getenv("DB_PASSWORD");
+                        $dbname = getenv("DB_NAME");
+                        $dsn = "mysql:dbname=".$dbname.";host=".$host;
 			try 
 			{
-				# Read settings from INI file, set UTF8
-				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                                # Create PDO connection using environment settings
+                                $this->pdo = new PDO($dsn, $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 				
 				# We can now log any exceptions on Fatal error. 
 				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
