@@ -1,0 +1,9 @@
+[2025-06-05 14:23:51] exec 명령: /usr/bin/php '/data/kci9874/public_html/controller/mail_process.php' 'hoon@hd-group.co.kr' '담당자' '[AS 문의] 1' '
+    <h2>AS 문의 접수</h2>
+    <p><strong>제목:</strong> 1</p>
+    <p><strong>이름/회사명:</strong> 2</p>
+    <p><strong>연락처:</strong> 3</p>
+    <p><strong>이메일:</strong> 4</p>
+    <p><strong>계약공사명:</strong> 5</p>
+    <p><strong>문의사항:</strong><br>6</p>
+' > /dev/null 2>&1 &
